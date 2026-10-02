@@ -1,0 +1,1090 @@
+        1                            2                                       3                                        4                              5                                   6
+
+
+
+
+A                                                                                                                                                                                            A
+
+
+
+
+                                                                                                                            Codec
+                                                                                         D+ / D-                                        NS4150B    Speaker
+      Type C for debug                                                                                                     ES8311
+    and function expansion
+                              VBUS                                                                             I2S
+                                         V_CHGIN          V_IN
+                                                                                      MCU_3V3
+                                                                     V_IN -> 3.3V
+                                                                                                                           ES7210       MIC * 2             Codec_3V3
+
+                                                                                                               CODEC_PWR_CTRL                     V_IN -> 3.3V
+                                                                                 PWR_EN
+
+                                                                                                                           BQ27220
+                                             Battery                      SAM8108                                                                  V_IN
+B                                            manage                                                                                                                                          B
+                                                                                                    ESP32-S3
+                                                                                                                I2C
+                                                                                                                                IMU
+                                                                                                                               BMI270
+
+                                                          Battary                   Button
+                                                       3.7V 700mAH
+                                                                                                                           CST816T
+
+         Magnetic connector                                                                                                1.85 inch
+                                                                                         UART1
+                                                                                                                             LCD
+                                                                                                               QSPI
+                                                                                                                           ST77916
+                                                                                                                                                  MCU-3V3
+                                                                                                                                           MOS
+                                                                 Touch PAD * 2
+
+                                                                                                               SDIO
+                                                                                                                           SD Card
+
+                                                                          G_LED                                POWER_CTRL
+
+C                                                                                                                                                                                            C
+
+
+
+
+                                                                                                                                                     创建日期                   2025-06-16
+                                                                        原理图                        SCH-ESP-VoCat-CoreBoard-V1_2                      更新日期                   2026-03-10
+                                                                        板子                                ESP-VoCat-CoreBoard-V1_2                   图页                     Overview
+                                                                        绘制
+D                                                                                                                                                                                            D
+                                                                        审阅                                                ESP-VoCat 喵伴：会听、会动、会陪伴的 AI 萌宠
+                                                                                                                          版本      尺寸                         页          1    共     4
+
+                                                                                                                                                                   Espressif
+        1                            2                                       3                                        4                              5                                   6
+                    1                                  2                          3                                 4                           5                         6
+
+
+    BOOT           GPIO0
+                                 ESP_BOOT
+
+
+
+
+A   CTRL GPIO9
+          U0TXD
+                              POWER_CTRL
+                               LED_G
+                                                                                                                                                                              A
+
+        * GPIO48             CODEC_PWR_CTRL                                                          U1     ESP32-S3-WROOM-1-N32R16V
+
+
+
+                    GPIO21
+    INT                              IMU_INT1
+                                                                                                                                        GND
+     MCU_3V3                                                MCU_3V3
+                                                                                      GND
+                                     ES_I2C_SCL
+          R1                                                                                                                  GND 41
+          2.2kΩ                      BAT_SCL
+          R0402                      IMU_SCL               C1      C2                            1                                40
+                    GPIO1                                                                            GND                      GND      GPIO1
+                                     TP_SCL                10uF    100nF                         2                                39
+                                                                                      CHIP_PU        3V3                       IO1     GPIO2
+                                     EX_I2C_SCL            C0603   C0402                         3                                38
+                                                                                      GPIO4          EN                        IO2     U0TXD
+                                                                                                 4                                37
+                                                                                      GPIO5          IO4                     TXD0      U0RXD
+                                     ES_I2C_SDA                                                  5                                36
+                    GPIO2                                                             GPIO6          IO5                     RXD0      GPIO42
+                                                                                                 6                                35
+    I2C   R2
+                                     TP_SDA
+                                     IMU_SDA
+                                                              GND
+                                                                                      GPIO7      7
+                                                                                                     IO6
+                                                                                                     IO7
+                                                                                                                              IO42
+                                                                                                                              IO41
+                                                                                                                                  34   GPIO41
+          R0402                                                                       GPIO15     8                                33   GPIO40
+                                     BAT_SDA                                                         IO15                     IO40
+          2.2kΩ                                                                       GPIO16     9                                32   GPIO39
+B                                    EX_I2C_SDA
+                                                                                      GPIO17         IO16                     IO39     GPIO38
+                                                                                                                                                                              B
+                                                                                                10                                31
+                                                                                      GPIO18         IO17                     IO38
+                                                                                                11                                30
+                                                                                      GPIO8          IO18                     IO37
+                                                                                                12                                29
+                                                                                      GPIO19         IO8                      IO36
+                                                                                                13                                28
+                                                                                      GPIO20         IO19                     IO35     GPIO0
+                                                                                                14                                27
+    USB            GPIO19
+                   GPIO20
+                                 USB_DN
+                                                           MCU_3V3
+                                                                                                     IO20                      IO0
+                                 USB_DP
+
+
+
+
+                                                                                                          IO46
+
+                                                                                                          IO10
+                                                                                                          IO11
+                                                                                                          IO12
+                                                                                                          IO13
+                                                                                                          IO14
+                                                                                                          IO21
+                                                                                                          IO47
+                                                                                                          IO48
+                                                                                                          IO45
+                                                                                                          IO3
+
+                                                                                                          IO9
+                                                                   R3
+                   GPIO12
+
+
+
+
+                                                                                                          15
+                                                                                                          16
+                                                                                                          17
+                                                                                                          18
+                                                                                                          19
+                                                                                                          20
+                                                                                                          21
+                                                                                                          22
+                                                                                                          23
+                                                                                                          24
+                                                                                                          25
+                                                                                                          26
+    LCD            GPIO11
+                                 LCD_SDA3
+                                 LCD_SDA2
+                                                                   10kΩ
+                                                                   R0402
+                   GPIO13
+
+
+
+
+                                                                                                          GPIO46
+
+                                                                                                          GPIO10
+                                                                                                          GPIO11
+                                                                                                          GPIO12
+                                                                                                          GPIO13
+                                                                                                          GPIO14
+                                                                                                          GPIO21
+                                                                                                          GPIO47
+                                                                                                          GPIO48
+                                                                                                          GPIO45
+                                 LCD_SDA1                               CHIP_PU
+
+
+
+
+                                                                                                          GPIO3
+
+                                                                                                          GPIO9
+                   GPIO46
+                                 LCD_SDA0
+                   GPIO18                                          C3
+                                 LCD_SCL
+                   GPIO45                                          1uF
+                                 LCD_DC
+                   U0RXD                                            C0402
+                                 LCD_BLK
+                   GPIO10
+                                 TP_INT
+                   GPIO14
+C                                LCD_CS                                                                                                                                       C
+                                                             GND
+                   GPIO47
+               *   GPIO8
+                                 LCD_RST_CTRL
+                                 LCD_TE
+
+
+               GPIO42
+                                 I2S_MCLK
+           * GPIO3
+             GPIO39
+                                 I2S_DI
+                                 I2S_WS
+    I2S        GPIO40
+               GPIO41
+                                 I2S_BCK
+                                 I2S_DO
+           * GPIO15              PA_CTRL
+                                                                                                                                                创建日期         2025-06-16
+                                                                             原理图            SCH-ESP-VoCat-CoreBoard-V1_2                        更新日期         2025-07-02
+               GPIO17
+                                SD_DA0
+    SD         GPIO16
+               GPIO38
+                                SD_CLK                                       板子                           ESP-VoCat-CoreBoard-V1_2              图页           MCU
+                                SD_CMD
+                                                                             绘制
+D                                                                                                                                                                             D
+                    GPIO4    U1RXD
+                                                                             审阅                                         ESP-VoCat 喵伴：会听、会动、会陪伴的 AI 萌宠
+    UART1 *         GPIO5    U1TXD
+          *
+                                                                                                                        版本     尺寸                   页    2    共     4
+                    GPIO6    TOUCH_PAD1
+    TOUCH *         GPIO7    TOUCH_PAD2           标有 * 符号代表有更改                                                                                          Espressif
+          *
+                    1                                  2                          3                                 4                           5                         6
+                                                  SD
+                 1                                             2                                         3                                             4                                            5                                                    6
+
+
+
+    TOUCH                                          I2C EXP                                              BAT CONNECT                                          GND
+                                                                                                                                                                                                               MCU_3V3                                  VCC_3V3
+                                                                                                                                                                                                                                       Q1
+
+
+
+
+                                                                                                                                                             4
+                                                                                                                                      VBAT_IN                         CN2
+
+
+
+
+                                                                                                                                                                 4
+                                                                                                                                                            2         HC-1.25-2PLT
+                                                                                     GND                                                                      2                                                                              AO3401A
+                                                                                                                                                            1
+A   GND                                                                                                                                                       1                                                                                                        A
+
+
+
+
+                                                                                                                                                                 3
+                                                                                         CN5
+           FPC1
+
+
+
+
+                                                                                                                                                             3
+                                                                                         HC-1.25-4PLT
+
+
+
+
+                                                                                     5
+                                                                                                                                          GND
+           1.0K-N-3PB                                                          1
+
+
+
+
+                                                                                     5
+                                                     EX_I2C_SCL                                                                                                                                   POWER_CTRL
+    4
+
+
+
+
+                                                                                 1
+               R28      510Ω TOUCH_PAD1              EX_I2C_SDA                2
+     4
+
+
+
+
+           3                                                                     2
+         3                                                  VIN                3                                                                             GND
+           2                                                                     3
+         2     R29      510Ω TOUCH_PAD2                                        4
+           1                                                                     4
+         1
+
+
+
+
+                                                                                     6
+     5
+
+
+
+
+                                                                                     6
+    5
+
+
+
+
+                                                                       GND
+                                                                                                                                                                                                                               GND
+     GND
+                                                                                     GND
+                                                                                                        LCD                                   GND                                                          VCC_3V3 U2
+
+
+
+
+                                                                                                                                                                                                                               40 40
+                                                                                                                                                                                               GND                      39                       LEDK
+                                                                                                                                                                                                                             39             38
+                                                                                                                                                                                                                        37             38
+                                                                                                                     VCC_3V3                          YXT-BB10-24S-02                                                        37             36                 GND
+                                                                                                                                       CN3                                                                              35             36
+
+
+
+
+                                                                                                                                              25 25
+                                                                                                                                              26 26
+                                                                                                                                                                                                                             35             34
+                                                                                                                                                                                                                        33             34
+                                                                                                                                       1                    24               LCD_CS                                          33             32
+                                                                                                                         LEDK            1             24                                                               31             32
+                                                                                                                                       2                    23               LCD_SDA0                                        31             30
+                                                                                                                         GND             2             23                                                 VCC_3V3       29             30
+                                                                                                                                       3                    22               LCD_SDA1                                        29             28               VCC_3V3
+                                                                                                                                         3             22                                                               27             28
+B
+    B2B CONNECT                                                                                                TP_SCL
+                                                                                                               TP_SDA
+                                                                                                                                       4
+                                                                                                                                       5
+                                                                                                                                       6
+                                                                                                                                         4
+                                                                                                                                         5
+                                                                                                                                                       21
+                                                                                                                                                       20
+                                                                                                                                                            21
+                                                                                                                                                            20
+                                                                                                                                                            19       GND
+                                                                                                                                                                             LCD_SCL
+                                                                                                                                                                                            VCC_3V3
+                                                                                                                                                                                                            GND
+                                                                                                                                                                                                                        25
+                                                                                                                                                                                                                        23
+                                                                                                                                                                                                                             27
+                                                                                                                                                                                                                             25
+                                                                                                                                                                                                                             23
+                                                                                                                                                                                                                                       26
+                                                                                                                                                                                                                                       24
+                                                                                                                                                                                                                                            26
+                                                                                                                                                                                                                                            24
+                                                                                                                                                                                                                                            22
+                                                                                                                                                                                                                                                                       B
+                                                                                                              LCD_RST                    6             19                                                               21             22                    LCD_TE
+                                                                                                                                       7                    18                                LCD_RST                        21             20
+                                                 H1                                                             TP_INT                   7             18                    LCD_SDA2                                   19             20                      GND
+                                                                                                                                GND    8                    17       GND                                                     19             18
+                                GND            1     2             BAT_SDA                                                               8             17                                                               17             18
+                                                  12                                                            MCU_3V3                9                    16               LCD_SDA3                                        17             16
+                              VBAT_IN          3     4             BAT_SCL                                                               9             16            GND                     LCD_SDA3                   15             16
+                                                  34                                                     VCC_3V3                      10                    15                                                               15             14              LCD_SDA2
+                             MCU_3V3           5     6             SD_CMD                                                       GND      10            15                                    LCD_SDA1                   13             14
+                                                  56                                                                                  11                    14                                                               13             12              LCD_SDA0
+                     POWER_CTRL                7     8             ESP_BOOT                                                              11            14                                      LCD_CS                   11             12
+                                                  78                                                           LCD_RST                12                    13             LCD_TE                                            11             10              LCD_SCL
+                                                                                                                                         12            13                                                                9             10
+
+
+
+
+                                                                                                                                              27 27
+                                                                                                                                              28 28
+                                                                                                                                                                                                GND                          9              8
+                                                ZX-PZ1.27-2-4PWZ                                                                                                                                                         7              8                   LCD_DC
+                                                                                                                                                                                                                             7              6               TP_SCL
+                                                                                                                                                                                              TP_SDA                     5              6
+                                                                                                                                                                                                                             5              4               LCD_RST
+                                                                                                                                                                                               TP_INT                    3              4
+                                                                                                                                                                                                                             3              2             MCU_3V3
+                                                                                                                                                                                                                         1              2
+
+
+
+
+                                                                                                                                                                                                                               41 41
+                                                                                                                                                                                                                             1
+                                                                                                                                              GND
+                                           H2                                                                                                                                                           VCC_3V3
+                                 U1RXD 1            2                                                                                            LEDK                                       GND
+                                                         VIN
+                                 CHIP_PU 3 1 2      4          U1TXD
+                                            34                                                                                                                                                                                 GND
+                                         5          6                                                                                             R4
+                          SD_CLK            56                     USB_DN                                                                                                                                   R22              8.03A0.039200
+                                         7          8                                                                                             20Ω
+                          SD_DA0            78                     USB_DP                                                                                                                                   100kΩ
+C                                               ZX-PZ1.27-2-4PWZ                                                                                                                                                  LCD_RST                                              C
+                                                                                                                                                      Q2
+                                                                                                                LCD_BLK
+                                                                                                                                                      AO3400A
+                                                                                                                                                                                                               Q4
+                                                                                                                                       R5                                    LCD_RST_CTRL
+                                                                                                                                                                                                               AO3400A
+                                                                                                                                       10kΩ
+                                                                                                                                       R0402                                                   R21
+                                                                                                                                                                                              10kΩ
+                                                                                                                                                                                              R0402
+
+    IMU                         GND
+                                                                                                                                              GND
+                                                                                                                                                                                                         GND
+                                          U3
+                                      1              14
+                                      2
+                                          SDO    SDX
+                                                     13
+                                                                         IMU_SDA
+                                                                                                                                                                                                    创建日期                      2025-06-16
+        MCU_3V3
+                                      3
+                                      4
+                                          ASDX
+                                          ASCX
+                                                 SCX
+                                                 CSB
+                                                     12
+                                                     11
+                                                                         IMU_SCL
+                                                                           MCU_3V3
+                                                                                                        原理图               SCH-ESP-VoCat-CoreBoard-V1_2                                              更新日期                      2025-07-14
+                     IMU_INT1             INT1  OSDO
+                                      5              10
+                                      6
+                                          VDDIO OCSB
+                                          GNDIO INT2
+                                                     9                                                  板子                             ESP-VoCat-CoreBoard-V1_2                                     图页                        Interface
+                            C5        7              8
+                           100nF          GND    VDD                         MCU_3V3
+                                                                                                        绘制
+D                          C0402          BMI270          C6                                                                                                                                                                                                           D
+                                                         100nF
+                                                         C0402
+                                                                                                        审阅                                                   ESP-VoCat 喵伴：会听、会动、会陪伴的 AI 萌宠
+                                GND
+
+                                                                GND                                                                                        版本              尺寸                             页         3             共              4
+    IIC ADDR : 0x68
+                                                                                                                                                                                                                  Espressif
+                 1                                             2                                         3                                             4                                            5                                                    6
+               1                                                                    2                                                                                       3                                    4                                                         5                                                                     6
+
+
+
+
+    CODEC_IIC                                                                           CODEC 3V3 DCDC                                                                                            AEC
+                                                                                                                                                                                                                                            C7
+                                                                                                                                                                                                                             R7             470nF   R8                   R9                             C8
+                                                                                                                                                                                                                     OUTP    2.2kΩ                  10kΩ                 20kΩ                           220nF     ADC_MIC3_P
+                                 CODEC_3V3
+                                                                                                                                                                                                                                  C9        C14                 C10                 R10             C11
+                                                                                                                                                                     CODEC_PWR_CTRL
+                                                                                                                                                                                                                                  10nF      470nF   R12         2.2nF    R13        4.3kΩ           100pFC15
+                                                                                                           VIN                          U4                                           CODEC_3V3                       OUTN                           10kΩ                 20kΩ                            220nF    ADC_MIC3_N
+                                                                                                                                                              L2 2.2uH
+                                         R6                                                                                         4                 3                                                                      R11
+A                                        2.2kΩ                                                                                          IN         LX
+                                                                                                                                                      2                                                                      2.2kΩ                                                                                                                           A
+                                         AUDIO_I2C_SDA                                                      C12                                   GND                      R23
+         ES_I2C_SDA                                                                                                                 5                 1                            C50     C13
+                                                                                                                                        FB         EN
+                                                                                                            10uF
+                                Q3.1                                                                                                    SY8088AAC                                  22pF    10uF
+                                                                                                                                                                     GND   680kΩ
+                                LBSS138DW1T1G
+
+                                 CODEC_3V3                                                             GND                                                                 R24
+                                                                                                                                                             R25
+                                                                                                                                                                                          GND
+                                                                                                                                                             100kΩ
+                                                                                                                                                                           150kΩ
+                                         R15
+                                                                                                                       R14              0Ω
+                                         2.2kΩ
+                                         AUDIO_I2C_SCL
+         ES_I2C_SCL                                                                                                                                                      GND
+
+                                Q3.2
+                                LBSS138DW1T1G
+                                                                                                             GND                               AGND
+                                                                                                                                                                                                  ES7210                                                                                                AGND
+
+
+
+                                                                                                                                                                                                                                     AGND                       U5
+                                                                                                                                                                                                                                                                                                      33
+                                                                                                                                                                                                                                         R16        10kΩ                                       EP
+                                                                                                                                                                                                                                                            1                                         32 ADC_MIC3_N
+                                                                                                                                                                                                                                                                AD0                         MIC3N
+    ES8311         AUDIO_I2C_SDA R26          33Ω
+                                                                                                                                                                                                        CODEC_3V3
+                                                                                                                                                                                                                                         R17
+                                                                                                                                                                                                                                AUDIO_I2C_SDA
+                                                                                                                                                                                                                                AUDIO_I2C_SCL
+                                                                                                                                                                                                                                                    10kΩ    2
+                                                                                                                                                                                                                                                            3
+                                                                                                                                                                                                                                                            4
+                                                                                                                                                                                                                                                                AD1
+                                                                                                                                                                                                                                                                CDATA
+                                                                                                                                                                                                                                                                                            MIC3P
+                                                                                                                                                                                                                                                                                          REFQ34
+                                                                                                                                                                                                                                                                                                      31 ADC_MIC3_P
+                                                                                                                                                                                                                                                                                                      30
+                                                                                                                                                                                                                                                                                                      29
+                                                                                                                                                                                                                                                                                                                       1uF
+                                                                                                                                                                                                                                                                                                                       1uF
+                                                                                                                                                                                                                                                                                                                                 C17
+                                                                                                                                                                                                                                                                                                                                 C18
+                   AUDIO_I2C_SCL R27          33Ω                       AGND                                                                                                                                                                                    CCLK                      REFP34
+                                                                                                       C16         1uF                                                                                                                                      5                                         28               1uF       C20
+                                                                                                                                                                                                                             I2S_MCLK                           MCLK                        MIC4P
+                                                                                                                                                                                                                                                            6                                         27               1uF       C22
+                                                C51 C52            U6                                                                                                                                   C19           C21                                       VDDP                        MIC4N
+                                                                                                                                                                                                                                                            7                                         26               1uF       C23
+                                                                         21
+
+                                                                               20
+                                                                               19
+                                                                               18
+                                                                               17
+                                                                               16
+                                                                                                                                                                                                        1uF          100nF                                      VDDD                    MICBIAS34                      1uF       C26
+
+
+
+
+                                                                                                                             AGND
+                                                33pF 33pF                                                                                                                                                                                                   8                                         25
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                          AGND
+                                                                                                                                                                                                                                                                GNDD                       REFQM
+                                                                          EP
+
+                                                                                                      CE
+                                                                                                   CDATA
+                                                                                          MIC1P/DMIC_SDA
+                                                                                                   MIC1N
+                                                                                                    VMID
+B                                                                                                                                                                                                                             I2S_BCK                       9                                         24 ADC_MICBIAS12 1uF       C28
+                                                                                                                                                                                                                                                                                                                                                             B
+                                                                                                                                                                                                                                                                SCLK                    MICBIAS12                                                CODEC_3V3
+                                                                                                                                                                                                                               I2S_WS                      10                                         23
+                                                                                                                                                                                                              AGND                                              LRCK                        VDDM
+                                              AGND                                                                                                                                                                               I2S_DI                    11                                         22
+                                                                                                                                                                                                                                                                SDOUT1/TDMOUT               VDDA
+                                                                                                                                        C25       1uF                                                                                                      12                                         21               C35       C36
+                                                               1                                                       15                                     AGND                                                                                              SDOUT2/TDMIN                GNDA
+                                              CODEC_3V3            CCLK                               ADCVREF                           C24       1uF                                                                                                      13                                         20 ADC_MIC2_N
+                                                               2                                                       14                                                                                                                                       INT                         MIC2N
+                                                                   MCLK                               DACVREF                                        C27      1uF OUTN                                                                                     14                                         19 ADC_MIC2_P     1uF       1uF
+                                                               3                                                       13                                                                                                                                       DMIC_CLK                    MIC2P
+                                                                                SCLK/DMIC_SCL
+
+
+
+
+                                                                   PVDD                                  OUTN                                                                                                                               ADC_MIC1_N     15                                         18
+                                                               4                                                       12                            C29      1uF OUTP                                                                                          MIC1N                     REFQ12
+                                                                   DVDD                                  OUTP                                                                                                                               ADC_MIC1_P     16                                         17
+                                                               5                                                       11                                                                                                                                       MIC1P                     REFP12
+                                                                   DGND                                  AVDD                                 C33     C34
+                                        C30           C31                                                                                                                                                                                                       ES7210                                                                 AGND
+                                                                                ASDOUT
+
+
+
+
+                                                                                                                            C32                                                                                                                                                                      C37            C38
+                                        1uF          100nF
+                                                                                DSDIN
+                                                                                AGND
+
+
+
+
+                                                                                                                                              22pF    22pF                                                                                                                                           1uF            1uF
+                                                                                LRCK
+
+
+
+
+                                                                                                                            1uF
+                                                                                                                                                                                                                        ES7210_I2C_ADD：0x40
+                                                                                6
+                                                                                7
+                                                                                8
+                                                                                9
+                                                                               10
+
+
+
+
+                                                                   ES8311                                                                           AGND
+                                                AGND                                                                                                                                                                                                                                                             AGND
+                            I2S_MCLK                                                                                   AGND
+                              I2S_BCK
+                                                                                              AGND                          CODEC_3V3
+                              I2S_WS
+                              I2S_DO
+
+                                                               C39             C40                C41            ES8311_I2C_ADD：0x18
+                                                               22pF            22pF               22pF
+
+
+                                                        AGND
+
+
+
+C                                                                                                                                                                                                 MIC CONNECT                                                                        GND
+                                                                                                                                                                                                                                                                                    FPC2                                                                     C
+
+
+
+
+                                                                                                                                                                                                                                                                                     10 10
+                                                                                                                                                                                                                                              MCU_3V3                           1
+                                                                                                                                                                                                                                                                                                2              LED_G
+                                                                                                                                                                                                                                                           ADC_MICBIAS12        3
+                                                                                                                                                                                                                                                                                                4       ADC_MIC2_N
+                                                                                                                                                                                                                                                           ADC_MIC2_P           5
+
+
+
+
+                                                                                                                                                                                                                                                                                                                          AGND
+                                                                                                                                              GND                                                                                                                                               6
+
+    PA                                                                                                                                              CN4
+                                                                                                                                                                                                                                                           ADC_MIC1_P           7
+                                                                                                                                                                                                                                                                                                8       ADC_MIC1_N
+
+
+
+
+                                                                                                                                                                                                                                                                                     9 9
+                                                                                                                                                    HC-1.25-2PLT
+                                                                                                                                              3
+
+
+
+
+                                                         GND
+                                                                                                                                              3
+
+
+
+
+                                                                                                                              VOP         1                                                                                                                                                  AFC11-S08ICA-00
+                                                                                                                              VON           1
+                                                                                                                                          2
+                                                                                                                                            2
+                                                             R18                                                            C42         C43
+                                                                                                                                                                                                                                                                                     GND
+                                                                                                                                              4
+
+
+
+
+                                                             10kΩ
+                                                                    U7
+                                                                                                                                              4
+
+
+
+                                                                                                                                                       GND
+
+
+
+
+                                                                                                                            1nF         1nF
+                                        PA_CTRL                 1                                   8
+                                                                  CTRL                          VoP
+                                                                2                                   7
+                      OUTPC44   100nF    R19         100kΩ        Bypass                        GND
+                                                                3                                   6                                                          VIN
+                      OUTNC45   100nF    R20         100kΩ        INP                           VCC
+                                                                4                                   5                    C46             C47         C48
+                                                                  INN                           VON
+                                                                   NS4150B
+                                                                                                                         1uF             22uF        22uF
+                                                       C49
+                                                                                                                                                                                                                                                                                                           创建日期                  2025-06-16
+                                                       1uF
+                                                                                                                 GND
+                                                                                                                                                                                                               原理图                     SCH-ESP-VoCat-CoreBoard-V1_2                                        更新日期                  2025-06-23
+D                                                        GND                                                                                                                                                                                                                                                                                                 D
+                                                                                                                                                                                                               板子                              ESP-VoCat-CoreBoard-V1_2                                    图页                    codec
+                                                                                                                                                                                                               绘制
+                放大倍数 = 240k / RIN                                                                                                                                                                              审阅                                                ESP-VoCat 喵伴：会听、会动、会陪伴的 AI 萌宠
+                                                                                                                                                                                                                                                            版本           尺寸                                       页         4      共             4
+
+                                                                                                                                                                                                                                                                                                                          Espressif
+               1                                                                    2                                                                                       3                                    4                                                         5                                                                     6
+                              1                                                                     2                                                          3                                                   4                                                                                        5                                                6
+
+                                                                                                                                                                                                                                                                                                VBUS            D1         VBUS_IN
+        POWER ON/OFF MANAGEMENT                                                                                 BAT CHARGE                                                                  GND
+                                                                                                                                                                                                           TYPE C                                         GND
+
+                                                                                                                                                                                                                                                                                                          1N5819WS
+                                                                                                                                                                                                                                                    U1
+                                                                                                                                                                                          R20                                                                                              VBUS_IN
+                                                                                                                                                                                                                         VBUS_IN
+                                                                                                                                                                                          1.5kΩ                                                A1                                 B12
+                                  VIN                                                                                                                                                                                                               GND                     GND
+                                                                                                                                                   U7                        R21
+                                                                                                                                                                                 1kΩ                                                           A4                                 B9
+                                                                                                                                 CHRG             1                       6                                   R7       5.1kΩ                        VBUS             VBUS                                                        R8
+                                                                                                                                                    CHRG#           PROG                                                                       A5                                 B8
+                                                                                                                                                  2                       5 STDBY                                                                   CC1              SUB2                    USB_DN
+                                                                                                                                                    GND            STDBY#                                  USB_DP                              A6                                 B7                                             5.1kΩ
+                                                                              R16                                                 VBAT            3                       4       VBUS                                                              DP1               DN2                    USB_DP
+                                                                                                                                                    BAT               VCC                                                                      A7                                 B6
+A                                               U8                            2MΩ
+                                                                                                                                                                                                           USB_DN
+                                                                                                                                                                                                                                               A8
+                                                                                                                                                                                                                                                    DN1               DP2
+                                                                                                                                                                                                                                                                                  B5                                                                               A
+                                                                                                                                                                                                                                                    SUB1              CC2
+                                        GND
+                                               1              6                         PWR_EN                                      C8              TP4057                    C9                                                               A9                                 B4
+                                                 GND      OUT                                                                                                                                                          VBUS_IN                      VBUS             VBUS                    VBUS_IN
+                                               2              5                                                                     10uF                                      10uF
+                                                 VDD       NC
+                                               3              4                                                                                                                                                                 D2         A12                                    B1
+                                                 NC     ONOFF                                                                                                                                                                                       GND                     GND                           D3 D4
+
+
+
+
+                                                                          1
+
+
+
+
+                                                                                                                                                                                                                                                           EP
+                                                                                                                                                                                                                                                           EP
+                                                                                                                                                                                                                                                           EP
+                                                                                                                                                                                                                                                           EP
+                                                SAM8108                       SW3
+                                                                              TS-1088-AR02016                                                GND                          GND
+
+
+
+
+                                                                                                                                                                                                                                                         1
+                                                                                                                                                                                                                                                         2
+                                                                                                                                                                                                                                                         3
+                                                                                                                                                                                                                                                         4
+                                                                                                                                                                                                                                    GND                                            GND
+                                                                                                                                                                                                                                 GND                                                                              GND
+
+
+
+
+                                                                          2
+                                                                                                                                                              U4
+                                                                                                                                                                                                                                                         GND
+                                                                                                                                                 R9
+                                                                          GND                                                   STDBY                                            VBUS
+                                                                                                                                                 R10
+                                                                                                                                CHRG
+                                                                                                                                                 4.7kΩ
+                                                                                                                                                 4.7kΩ
+                                                                                                                                                              A-SP1102DR6GHC-C01-2C
+                                                                                                                                                                                                           Magnetic connector
+                                                                                                                                                                                                                                                               VBUS_IN2                                   VBUS
+                                                                                                                                                                                                                                                                                           D12
+
+                                                                 MCU_3V3
+                                                                                    Q2
+                                                                                                    VCC_3V3     DCDC                        Vout = 0.6 x (1 + R10/R12) = 3.315V                             D13
+                                                                                                                                                                                                                             C3
+                                                                                                                                                                                                                                                                                            1N5819WS
+                                                                                                                                                                                                                                                                                           U2
+                                                                                                                                                                                                                             C0603
+                                                                                                                        AO3401A VIN                                                                                                                                                    1
+                                                                                                                                                                                                                             10uF                                                        1
+                                                                                                                           Q1                                                                                                                              D14          U1RXD          2
+                                                                                          AO3401A                                                                                                                                                                                        2
+       ESP_RST                                                             R15
+                        1
+
+
+
+
+                                                                           10kΩ                                  VBAT                       U6                                                                                                             D15          U1TXD          3
+                            SW1                                                                                                                                                       MCU_3V3                                                                                            3
+B                                                                                                                                       5           1 PWR_EN                                                                                                                           4                                                                           B
+                            TS-1088-AR02016                                                                                                 FB   EN                                                                                                                                      4
+                                                                                                                                                    2
+                                                                                                                  VBUS                          GND                                                                    GND
+                                                                                                                                       4            3
+                                                                                                                                          VIN    SW        L1 2.2uH                                                                       GND                    GND
+                        2
+
+
+
+
+                                              POWER_CTRL                                                                R12
+                                                                                                                                         TLV62569DBVR                                             R13
+                                                                                                                        R0402                                     C5
+                                                                                                                                      C4                                                          100kΩ
+                                                                                                                        10MΩ                                      10uF             C6
+                                                                                                                                      10uF             GND
+                        GND                                                                                                                                                        100nF
+                                                                                                                                                                                                  R14
+      ESP_BOOT                                               VBAT                 VIN            VBUS
+                                                                                                                                                                                                  22.1kΩ
+                                                                                                                                                                                                           Soldered screw hole
+                        1
+
+
+
+
+                                                                           D10           D11
+                            SW2                                                                                                  GND
+                            TS-1088-AR02016
+                                                                                                                                                               MCU_3V3
+                                                                     1N5819WS           1N5819WS
+                                                                                                                                                                                  GND                                                     U3
+                                                                                                                                                                                                                                                                                           U5
+                        2
+
+
+
+
+                                                                                                                                                                                                                          GND
+                                                                                                        C7                                                                                                                            1
+
+
+
+
+                                                                                                                                                                                                                                                                            GND
+                                                                                                                                                                                                                                                                                       1
+                                                                                                        10uF                        C15           C14         C13
+                                                                                                        C0603                       10uF          10uF        10uF
+                        GND
+
+                                                                                                                                            GND
+                                                                                                 GND
+
+
+                                                                                                                                                                                                           SD CARD
+                                                                                                                                                                                                                                                                       VCC_3V3
+
+
+                        B2B connector
+
+
+
+
+                                                                                                                                                                                                                                                                                                                          GND
+                                                                                                                BAT MANAGEMENT                                                                                                                            GND
+
+
+
+
+                                                                                                                                                                                                                                                                             R1
+                                                                                                                                                                                                                                                                                  R2
+                                                                                                                                                                                                                                                                                  R3
+                                                                                                                                                                                                                                                                                  R4
+                                                                                                                                                                                                                                                                                  R5
+                                                                                                                                                                                                                                                                                  R6
+C                                                                                                                                                                                                                                                                                                                                                                  C
+
+
+
+
+                                                                                                                                                                                                                                                                 10kΩ（NC）
+
+
+
+
+                                                                                                                                                                                                                                                                                                 10kΩ
+                                                                                                                                                                                                                                                                                  10kΩ
+                                                                                                                                                                                                                                                                                  10kΩ
+                                                                                                                                                                                                                                                                                  10kΩ
+                                                                                                                                                                                                                                                                                  10kΩ
+
+
+
+
+                                                                                                                                                                                                                                                                                                                13 13
+
+                                                                                                                                                                                                                                                                                                                        12 12
+                                                         H1                                                                                                                                                               VCC_3V3                                                                                               CARD1
+                                                                                                                                                                                                                                                                                                  1                             TF PUSH
+                                    GND                2     1                BAT_SDA                                               R17                                            R18                                                                                                                  DAT2
+                                                          21                                                                                             U9                                                                                                                                       2
+                                  VBAT_IN              4     3                BAT_SCL                                               100kΩ                                          10kΩ                                                                                                                 CD/DAT3
+                                                          43                                                                                                                                                                              SD_CMD                                                  3
+                                 MCU_3V3               6     5                SD_CMD                                    VBAT                        A1 GPOUT            BIN B1                                                                                                                          CMD
+                                                          65                                                                                                                                                                                                                                      4
+                         POWER_CTRL                    8     7                ESP_BOOT                                     BAT_SDA                  A2 SDA             VSS B2                                                                                                                           VDD
+                                                          87                                                                                                                                                                     C2        SD_CLK                                                 5
+                                                                                                                           BAT_SCL                  A3 SCL             VDD B3                                                                                                                           CLX
+                                                        X1321FVS-2x04-C43D48                                                                                                                                                                                                                      6
+                                                                                                                                                                                                                                                                                                        VSS
+                                                                                                                                                                              C11                                                100nF SD_DA0                                                     7
+                                                                                                                        VBAT                        C2 SRN                                                                                                                                              DAT0
+                                                                                                                                                                              2.2uF                                                                                                               8
+                                                                                                                                                    C1 SRP                                                                                                                                              DAT1
+                                                                                                                                                                                                                                                                                                 CD
+                                                                                                                                                    C3 BAT                                                                                                                                              CD
+
+
+
+
+                                                                                                                                                                                                                                                                                                                10 10
+
+                                                                                                                                                                                                                                                                                                                        11 11
+                                                                                                                    VBAT_IN
+                                                                                                                                  R19
+                                                                                                                                  10mΩ                   BQ27220YZFR                                                         GND
+                                                        H2
+                                                                                                                                  R1206                                               GND
+                                              U1RXD    2    1                                                                                     C12
+                                                         21         VIN
+                                                       4    3             U1TXD                                                                   1uF                                                                                                                                      GND
+                                  ESP_RST                43
+
+
+
+
+                                                                                                                                                                                                                                                                                                                          GND
+                                                       6    5
+
+
+
+
+                                                                                                                                                                                                                                                                            D5
+                                                                                                                                                                                                                                                                            D6
+                                                                                                                                                                                                                                                                            D7
+                                                                                                                                                                                                                                                                            D8
+                                                                                                                                                                                                                                                                            D9
+                                   SD_CLK                65                   USB_DN
+                                                       8    7
+
+
+
+
+                                                                                                                                                                                                                                                                                                GND
+                                   SD_DA0                87                   USB_DP                                                         GND
+                                                        X1321FVS-2x04-C43D48
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                          创建日期        2025-06-25
+                                                                                                                                                                                                              原理图                               SCH-ESP-VoCat-BaseBoard-V1_2                                                              更新日期        2026-03-10
+D                                                                                                                                                                                                                                                                                                                                                                  D
+                                                                                                                                                                                                              板子                                                ESP-VoCat-BaseBoard-V1_2                                                  图页          P1
+                                                                                                                                                                                                              绘制
+                                                                                                                                                                                                              审阅                                                                           ESP-VoCat 喵伴：会听、会动、会陪伴的 AI 萌宠
+                                                                                                                                                                                                                                                                                       版本                尺寸                                页      1    共     1
+
+                                                                                                                                                                                                                                                                                                                                                 Espressif
+TYPE-C 16PIN 2MD(073)         1                                                                     2                                                          3                                                   4                                                                                        5                                                6
+          1                                      2                                               3              4                                          5                            6
+
+
+
+    MIC                                                                                              FPC CONNECT
+A                                                                                                                                                                                           A
+
+      ADC_MICBIAS12                      U3
+                                        1         4
+                                          VDD OUT                C1      1uF       ADC_MIC1_P
+                         C3     C2      2         3
+                                          GND GND
+                                         LMA3729T381-OY3S                                                                                 AGND
+                         10uF   100nF                            C4      1uF
+                                                                                   ADC_MIC1_N
+                                                  R2
+
+
+
+
+                                                                                                                                          99
+                       AGND                                      C5
+                                                  0Ω                                                                                  8           FPC1
+                                                                 22pF                                       MCU_3V3                       8
+                                                                                                                      LED_G           7           FPC-05F-8PH20
+                                                                                                                      ADC_MICBIAS12       7
+                                                                                                                                      6
+                                                                                                                      ADC_MIC2_N          6
+                                                        AGND                                                                          5
+                                                                                                                      ADC_MIC2_P          5
+                                                                                                                                      4
+                                                                                                                                          4
+                                                                                                            AGND                      3
+                                                                                                                      ADC_MIC1_P          3
+       ADC_MICBIAS12                      U4                                                                                          2
+                                                                                                                      ADC_MIC1_N          2
+                                                                                                                                      1
+
+
+
+
+                                                                                                                                          10 10
+                                        1          4                                                                                      1
+                                           VDD OUT                C6         1uF    ADC_MIC2_P
+                         C8     C7      2          3
+                                           GND GND
+B                        10uF   100nF
+                                         LMA3729T381-OY3S
+                                                                  C9         1uF
+                                                                                                                                                                                            B
+                                                                                    ADC_MIC2_N                                            AGND
+                                                     R3
+                         AGND                                         C10
+                                                     0Ω
+                                                                      22pF
+
+
+                                                          AGND
+
+
+
+
+    LED
+C                                                                                                                                                                                           C
+
+
+
+                                              MCU_3V3
+
+
+
+                                 LED1                R1
+                                                     2.2kΩ
+                 LED_G
+                                 KT-0805G
+                                                                                                                                                           创建日期            2025-06-16
+                                                                                           原理图       SCH-ESP-VoCat-MicBoard-V1_2                           更新日期            2025-07-14
+                                                                                           板子            ESP-VoCat-MicBoard-V1_2                           图页              P1
+                                                                                           绘制
+D                                                                                                                                                                                           D
+                                                                                           审阅                         ESP-VoCat 喵伴：会听、会动、会陪伴的 AI 萌宠
+                                                                                                                    版本    尺寸                                      页    1    共     1
+
+                                                                                                                                                                      Espressif
+          1                                      2                                               3              4                                          5                            6
+

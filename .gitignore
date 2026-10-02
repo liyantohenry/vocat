@@ -1,0 +1,23 @@
+# Build outputs, downloaded components and generated config under firmware/ are ignored by
+# firmware/.gitignore (build/, managed_components/, sdkconfig, dependencies.lock, gen_bmgr_codes/).
+
+# Stock flash dump and local logs: large, and they hold device and network details
+backup/
+logs/
+
+# Research scratch: keep notes, scripts and sources; skip bulky binaries and private captures
+research/**/*.bin
+research/**/*.dis
+research/**/*.jpg
+research/**/*.jpeg
+research/**/*.log
+research/**/*.tgz
+research/bk/
+research/bm/
+research/blescan*.txt
+
+# Personal Claude Code overrides for this checkout
+.claude/settings.local.json
+
+# Local convenience script (holds a session id)
+run_claude_session.sh

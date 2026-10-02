@@ -1,0 +1,78 @@
+# Peripherals Configuration for the CyberAI EchoEar clone (ESP32-S3, 16 MB quad flash, octal PSRAM)
+# Pin map read from the running CyberAI firmware over JTAG (GPIO matrix / IO_MUX registers).
+# GPIO7 (power latch), GPIO15 and GPIO21 are driven high and pad-held by the bootloader hook
+# (bootloader_components/cyberai_power_hold).
+peripherals:
+  # I2C: ES8311, ES7210, CST816S touch, QMI8658 IMU, BQ27220 fuel gauge
+  - name: i2c_master
+    type: i2c
+    role: master
+    config:
+      port: 0
+      pins:
+        sda: 2                          # GPIO2 - I2C SDA
+        scl: 1                          # GPIO1 - I2C SCL
+
+  # I2S Audio Configuration
+  - name: i2s_audio_out
+    type: i2s
+    role: master
+    format: std-out                     # std-out, std-in
+    config: &i2s_config
+      port: 0
+      # Clock configuration
+      sample_rate_hz: 48000             # Sample rate in Hz
+      mclk_multiple: 256                # Multiple of MCLK to sample rate (256 or 384 for 24-bit)
+      # Slot configuration
+      data_bit_width: 16                # Data bit width (valid data bits per sample)
+      slot_bit_width: I2S_SLOT_BIT_WIDTH_AUTO  # Total bits per slot (I2S_SLOT_BIT_WIDTH_AUTO or specific value)
+      slot_mode: I2S_SLOT_MODE_STEREO   # I2S_SLOT_MODE_MONO or I2S_SLOT_MODE_STEREO
+      slot_mask: I2S_STD_SLOT_BOTH      # I2S_STD_SLOT_LEFT, I2S_STD_SLOT_RIGHT, or I2S_STD_SLOT_BOTH slots
+      ws_width: 16                      # WS signal width in BCLK ticks
+
+      # GPIO configuration
+      pins:
+        mclk: 42                        # GPIO42 - I2S0_MCLK
+        bclk: 40                        # GPIO40 - I2S0 BCK
+        ws: 39                          # GPIO39 - I2S0 WS
+        dout: 41                        # GPIO41 - I2S0 SD out (ES8311)
+        din: 38                         # GPIO38 - I2S0 SD in (ES7210)
+
+  - name: i2s_audio_in
+    type: i2s
+    role: master
+    format: std-in
+    config: *i2s_config
+
+  # LCD QSPI bus for ST77916 (FSPI signals routed through the GPIO matrix on this board)
+  - name: spi_display
+    type: spi
+    role: master
+    config:
+      # spi_bus_config_t fields
+      spi_bus_config:
+        spi_port: SPI2_HOST
+        mosi_io_num: 13                  # QSPI D0 (FSPID)
+        miso_io_num: 9                   # QSPI D1 (FSPIQ)
+        quadwp_io_num: 12                # QSPI D2 (FSPIWP)
+        quadhd_io_num: 46                # QSPI D3 (FSPIHD)
+        sclk_io_num: 14                  # QSPI CLK (FSPICLK)
+        max_transfer_sz: 7200            # Maximum transfer size in bytes : width * 2 * 10
+
+  - name: ledc_backlight
+    type: ledc
+    role: none
+    config:
+      gpio_num: 3                           # GPIO3 - backlight PWM (LEDC)
+      freq_hz: 2000                         # PWM frequency 2kHz
+      duty: 0                               # Initial duty cycle (0%)
+      duty_resolution: LEDC_TIMER_10_BIT    # 10-bit duty resolution
+
+  # Speaker amplifier enable, switched by the ES8311 driver (active high). The stock CyberAI
+  # firmware passes GPIO4 as the pa_pin of its ES8311 codec (same as the official board V1.0).
+  - name: gpio_pa_control
+    type: gpio
+    config:
+      pin: 4                           # GPIO4 - AMP Control
+      mode: GPIO_MODE_OUTPUT
+      default_level: 0

@@ -1,0 +1,67 @@
+esp_emote_gfx 2.1.0 ships the label widget twice: src/widget/gfx_draw_label.c and src/widget/gfx_label.c
+define the same functions. Both are compiled into the component's static library, and the linker takes
+gfx_draw_label.c.obj (the first archive member that defines them), so gfx_label.c is dead code. The fix
+belongs in gfx_draw_label.c:
+ - a wrapped line's cached width (used to centre it) included the start of the word that moved to the
+   next line, so centred wrapped text was drawn too far left;
+ - the newline that ends a line no longer counts toward its width;
+ - a line that ended on its own newline no longer skips the next character, which swallowed blank lines.
+
+diff --git a/src/widget/gfx_draw_label.c b/src/widget/gfx_draw_label.c
+index e290a8e..a7aa8b8 100644
+--- a/src/widget/gfx_draw_label.c
++++ b/src/widget/gfx_draw_label.c
+@@ -784,6 +784,8 @@ static esp_err_t gfx_parse_text_lines(gfx_obj_t *obj, void *font_ctx, int total_
+             const char *line_end = line_start;
+             int line_width = 0;
+             const char *last_space = NULL;
++            int width_at_last_space = 0;
++            bool ended_by_newline = false;
+ 
+             while (*line_end) {
+                 uint32_t unicode = 0;
+@@ -802,21 +804,28 @@ static esp_err_t gfx_parse_text_lines(gfx_obj_t *obj, void *font_ctx, int total_
+                 if (line_width + char_width > obj->geometry.width) {
+                     if (last_space && last_space > line_start) {
+                         line_end = last_space;
++                        /* The line stops at the last space, so drop the width of the word that
++                         * moves to the next line: this cached width is what centres the line, and
++                         * an inflated one draws centred text too far left.
++                         */
++                        line_width = width_at_last_space;
+                     } else {
+                         line_end -= bytes_in_char;
+                     }
+                     break;
+                 }
+ 
+-                line_width += char_width;
++                if (c == '\n') {
++                    ended_by_newline = true;
++                    break;      /* the newline stays in the line text but adds no width */
++                }
+ 
+                 if (c == ' ') {
+                     last_space = line_end - bytes_in_char;
++                    width_at_last_space = line_width;   /* width without this trailing space */
+                 }
+ 
+-                if (c == '\n') {
+-                    break;
+-                }
++                line_width += char_width;
+             }
+ 
+             int line_len = line_end - line_start;
+@@ -845,7 +854,10 @@ static esp_err_t gfx_parse_text_lines(gfx_obj_t *obj, void *font_ctx, int total_
+             }
+ 
+             line_start = line_end;
+-            if (*line_start == ' ' || *line_start == '\n') {
++            /* Skip the space or newline a wrapped line broke at. A line that ended on its own newline
++             * has already consumed it, and skipping again would swallow a following blank line.
++             */
++            if (!ended_by_newline && (*line_start == ' ' || *line_start == '\n')) {
+                 line_start++;
+             }
+         }

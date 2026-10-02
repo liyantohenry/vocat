@@ -1,0 +1,16 @@
+## IDF Component Manager Manifest File
+## Screen and USB side of the app, with no voice dependencies: display, dashboard, quick keys, USB keyboard.
+dependencies:
+  espressif2022/esp_emote_expression:
+    version: "0.0.*"
+    require: public
+
+  boards:
+    override_path: ../boards
+    require: public
+
+  # USB keyboard for the quick keys (app_usb_hid.c, BOARD_ENABLE_QUICK_KEYS)
+  espressif/esp_tinyusb:
+    version: '^2.1.0'
+    rules:
+      - if: "target in [esp32s2, esp32s3, esp32p4]"

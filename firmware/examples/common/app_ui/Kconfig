@@ -1,0 +1,16 @@
+menu "App UI Config"
+
+    config APP_EMOTE_PARTITION_LABEL
+        string "Emote Partition Label"
+        default "anim_icon"
+        help
+            This is the partition label for the emote assets.
+
+    config APP_EMOTE_TASK_CORE_ID
+        int "Emote Task Core ID"
+        default 0
+        range 0 1
+        help
+            This is used to pin the gfx emote task to a specific core.
+
+endmenu

@@ -1,0 +1,7 @@
+## IDF Component Manager Manifest File
+dependencies:
+  idf:
+    version: '>=5.5'
+
+  app_ui:
+    override_path: ../../common/app_ui

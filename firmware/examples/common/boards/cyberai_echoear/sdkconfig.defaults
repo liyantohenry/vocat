@@ -1,0 +1,21 @@
+# Octal PSRAM
+CONFIG_SPIRAM_MODE_OCT=y
+
+# OCT PSRAM 120 MHz is not stable
+CONFIG_SPIRAM_SPEED_80M=y
+CONFIG_ESPTOOLPY_FLASHFREQ_80M=y
+
+# Fonts for the desk dashboard (app_dashboard.c)
+CONFIG_LV_FONT_MONTSERRAT_28=y
+CONFIG_LV_FONT_MONTSERRAT_48=y
+
+# Comfortable desk listening level (the ES8311 curve puts 75 near the amp maximum)
+CONFIG_APP_AUDIO_DEFAULT_PLAYBACK_VOLUME=35
+
+# Provision over BLE (the ESP RainMaker Home app has no SoftAP flow for this firmware)
+CONFIG_APP_NETWORK_PROV_TRANSPORT_BLE=y
+
+# Quick keys USB keyboard (app_usb_hid.c): one HID interface plus a CDC control/log port
+CONFIG_TINYUSB_HID_COUNT=1
+CONFIG_TINYUSB_CDC_ENABLED=y
+CONFIG_TINYUSB_CDC_COUNT=1

@@ -1,0 +1,4 @@
+dependencies:
+  espressif/esp_board_manager:
+    version: '^0.5.0'
+    require: public

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(scripts/flash_cyberai_jtag.sh:*)",
+      "Bash(APP=desk_keys scripts/flash_cyberai_jtag.sh:*)",
+      "Bash(APP=voice_chat scripts/flash_cyberai_jtag.sh:*)"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+menu "ESP Agent Setup Configuration"
+
+    config AGENT_SETUP_RAINMAKER_DEVICE_NAME
+        string "RainMaker Device Name"
+        default "Espressif AI Agent"
+        help
+            This is the name of the device that will be visible in the RainMaker Phone app.
+
+    config AGENT_SETUP_DEFAULT_AGENT_ID
+        string "Default agent ID"
+        default ""
+        help
+            Default Agent ID
+
+    config AGENT_SETUP_CREATE_RAINMAKER_DEVICE
+        bool "Create RainMaker device for Agent configuration"
+        default y
+        help
+            When enabled, setup_rainmaker_init() will create a RainMaker device for configuring the agent
+            This device can be used for configuing the agent ID and volume of device as RainMaker params.
+
+            You may disable this option if you do not want the Agent ID to be configurable from the RainMaker app.
+            Or if you are creating another RainMaker device for this purpose.
+
+            Note: The user auth service is always created regardless of this option.
+
+endmenu

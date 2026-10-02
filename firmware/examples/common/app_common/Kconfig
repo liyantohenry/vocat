@@ -1,0 +1,34 @@
+menu "App Common Config"
+
+    config APP_AUDIO_DEFAULT_PLAYBACK_VOLUME
+        int "Default Playback Volume"
+        default 75
+        range 0 100
+        help
+            This is the default volume for the playback device.
+
+    config AUDIO_UPLOAD_SAMPLE_RATE
+        int "Upload sample rate"
+        default 8000
+        help
+            Upload sample rate in Hz.
+
+    config AUDIO_DOWNLOAD_SAMPLE_RATE
+        int "Download sample rate"
+        default 16000
+        help
+            Download sample rate in Hz.
+
+    config AUDIO_UPLOAD_FRAME_DURATION_MS
+        int "Upload frame duration"
+        default 20
+        help
+            Upload frame duration in milliseconds.
+
+    config AUDIO_DOWNLOAD_FRAME_DURATION_MS
+        int "Download frame duration"
+        default 60
+        help
+            Download frame duration in milliseconds.
+
+endmenu

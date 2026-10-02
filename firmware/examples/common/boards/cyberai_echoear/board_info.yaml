@@ -1,0 +1,5 @@
+board: cyberai_echoear
+chip: esp32s3
+version: 1.0.0
+description: "CyberAI EchoEar clone (ESP-VoCat compatible, custom pinout)"
+manufacturer: "CyberAI"

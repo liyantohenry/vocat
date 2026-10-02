@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VoCat Screen Surfaces</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one column of sections; device screens as round 360x360 SVGs in a wrapping grid */
+:root {
+  --bg: #F2F4F7;
+  --surface: #FFFFFF;
+  --ink: #121720;
+  --muted: #566173;
+  --line: #D8DDE5;
+  --accent: #0F6F96;
+  --accent-soft: #E1F2FA;
+  --amber: #8A5A00;
+  --amber-soft: #FFF3D6;
+  --good: #1E7A4C;
+  --good-soft: #E3F4EA;
+  --code-bg: #E9EDF2;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Public Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0C0F13;
+    --surface: #141920;
+    --ink: #E9EEF4;
+    --muted: #8A94A6;
+    --line: #252C36;
+    --accent: #5EC8F2;
+    --accent-soft: #0F2A36;
+    --amber: #FFC857;
+    --amber-soft: #2E2410;
+    --good: #5CCB8F;
+    --good-soft: #10281C;
+    --code-bg: #1B222B;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0C0F13;
+  --surface: #141920;
+  --ink: #E9EEF4;
+  --muted: #8A94A6;
+  --line: #252C36;
+  --accent: #5EC8F2;
+  --accent-soft: #0F2A36;
+  --amber: #FFC857;
+  --amber-soft: #2E2410;
+  --good: #5CCB8F;
+  --good-soft: #10281C;
+  --code-bg: #1B222B;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  padding-inline: 20px;
+  padding-block: 44px 96px;
+}
+.wrap { max-width: 1100px; margin: 0 auto; display: grid; gap: 56px; }
+.prose { max-width: 66ch; display: grid; gap: 12px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2.1rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: 1.6rem; font-weight: 700; }
+h3 { font-size: 1.02rem; font-weight: 600; }
+p { margin: 0; }
+section { display: grid; gap: 22px; }
+.eyebrow { font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.lede { font-size: 1.12rem; color: var(--muted); max-width: 62ch; }
+code { font-family: var(--font-mono); font-size: 0.86em; background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+.muted { color: var(--muted); }
+a { color: var(--accent); }
+
+.screens { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px 26px; }
+.screens.small { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.screens.small figure svg { max-width: 210px; }
+figure { margin: 0; display: grid; gap: 10px; justify-items: start; align-content: start; }
+figure svg { width: 100%; max-width: 268px; height: auto; display: block; }
+figcaption { display: grid; gap: 3px; }
+figcaption b { font-family: var(--font-display); font-size: 1.02rem; }
+figcaption span { color: var(--muted); font-size: 0.9rem; }
+.tag {
+  display: inline-block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); vertical-align: 2px;
+}
+.tag.voice { background: var(--amber-soft); color: var(--amber); }
+.tag.new { background: var(--good-soft); color: var(--good); }
+
+.pages { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px 26px; }
+.phone {
+  width: 100%; max-width: 300px; border: 1px solid var(--line); border-radius: 22px; overflow: hidden;
+  background: #0b0f13; color: #e9eef4; font-size: 13px; line-height: 1.45;
+}
+.phone .bar { display: flex; justify-content: space-between; padding: 7px 14px; color: #8a94a6; font-size: 10px; border-bottom: 1px solid #1b222b; }
+.phone .body { padding: 16px 14px 20px; display: grid; gap: 8px; }
+.phone h4 { margin: 0; font: 600 17px/1.2 var(--font-body); }
+.phone p { color: #8a94a6; margin: 0 0 4px; font-size: 12px; }
+.row {
+  display: flex; align-items: center; gap: 10px; padding: 11px 12px; background: #141920;
+  border: 1px solid #252c36; border-radius: 10px;
+}
+.row .name { flex: 1; }
+.sig { color: #5ec8f2; letter-spacing: 1px; font-size: 11px; }
+.sig i { color: #2c3a47; font-style: normal; }
+.field { display: grid; gap: 5px; margin-top: 6px; }
+.field label { color: #8a94a6; font-size: 11px; }
+.input { padding: 10px 12px; background: #141920; border: 1px solid #252c36; border-radius: 10px; color: #e9eef4; }
+.seg { display: flex; gap: 6px; }
+.seg span { flex: 1; text-align: center; padding: 9px 0; background: #141920; border: 1px solid #252c36; border-radius: 10px; font-size: 12px; }
+.seg span.on { border-color: #5ec8f2; color: #5ec8f2; }
+.btn { margin-top: 10px; padding: 11px; text-align: center; background: #5ec8f2; color: #03222f; border-radius: 10px; font-weight: 600; }
+.btn.quiet { background: transparent; border: 1px solid #252c36; color: #e9eef4; font-weight: 500; }
+.btn.warn { background: transparent; border: 1px solid #4a2a2a; color: #f0a19a; font-weight: 500; }
+.meter { height: 6px; border-radius: 3px; background: #252c36; position: relative; }
+.meter i { position: absolute; inset: 0 30% 0 0; background: #5ec8f2; border-radius: 3px; }
+
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 22px 32px; }
+.note { display: grid; gap: 4px; align-content: start; padding-left: 14px; border-left: 3px solid var(--accent); }
+.note b { font-family: var(--font-display); }
+.note span { color: var(--muted); font-size: 0.93rem; }
+
+.sub { display: grid; gap: 14px; }
+.sub h3 { font-size: 1.15rem; }
+
+@media (max-width: 520px) {
+  body { padding-block: 32px 64px; padding-inline: 16px; }
+  .wrap { gap: 42px; }
+}
+</style>
+</head><body>
+
+<div class="wrap">
+
+<header class="prose">
+  <div class="eyebrow">VoCat · desk_keys · updated 2 Oct 2026</div>
+  <h1>VoCat Screen Surfaces</h1>
+  <p class="lede">Every surface the device shows on its 360 × 360 round screen, and every page it serves over Wi-Fi, drawn at their real proportions. The battery readout on the clock page is new and proposed; everything else is on the board today.</p>
+</header>
+
+<section>
+  <div class="prose">
+    <h2>On the device</h2>
+    <p class="muted">Swipe left or right to move between Clock, Media, Desktop and Neurons. The other surfaces take over when they apply.</p>
+  </div>
+  <div class="screens" id="screens"></div>
+</section>
+
+<section id="battery">
+  <div class="prose">
+    <h2>Battery level <span class="tag new">proposed</span></h2>
+    <p class="muted">The board has the same battery gauge chip as Espressif's VoCat (a BQ27220 on the shared I²C bus, at 0x55). The stock CyberAI firmware already reads it, so the clock page can show a real percentage and whether the battery is charging.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Where it goes</h3>
+    <div class="screens small" id="placements"></div>
+  </div>
+
+  <div class="sub">
+    <h3>What it shows (bottom placement)</h3>
+    <div class="screens small" id="states"></div>
+  </div>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>In a browser</h2>
+    <p class="muted">The board runs a small web server: the setup pages on its own network, and the settings page at its address on your Wi-Fi.</p>
+  </div>
+  <div class="pages">
+
+    <figure>
+      <div class="phone">
+        <div class="bar"><span>VoCat-Setup-A1B2</span><span>192.168.4.1</span></div>
+        <div class="body">
+          <h4>Connect VoCat to Wi-Fi</h4>
+          <p>Tap your network. VoCat uses 2.4 GHz Wi-Fi, so 5 GHz-only networks aren't listed.</p>
+          <div class="row"><span class="name">Home Wi-Fi</span><span class="sig">▂▄▆█</span></div>
+          <div class="row"><span class="name">Flat 3B</span><span class="sig">▂▄▆<i>█</i></span></div>
+          <div class="row"><span class="name">CoffeeBar Guest</span><span class="sig">▂▄<i>▆█</i></span></div>
+          <div class="row"><span class="name">Other network…</span></div>
+        </div>
+      </div>
+      <figcaption><b>Network list</b><span>Opens by itself as a sign-in page when you join the setup network.</span></figcaption>
+    </figure>
+
+    <figure>
+      <div class="phone">
+        <div class="bar"><span>VoCat-Setup-A1B2</span><span>/join</span></div>
+        <div class="body">
+          <h4>Home Wi-Fi</h4>
+          <p>Enter the Wi-Fi password.</p>
+          <div class="field"><label>Password</label><div class="input">••••••••••••</div></div>
+          <div class="btn">Connect</div>
+          <p style="margin-top:10px"><span style="color:#5ec8f2">Back to the list</span></p>
+        </div>
+      </div>
+      <figcaption><b>One network</b><span>Tapping a name opens its own page, the way a phone's Wi-Fi picker does.</span></figcaption>
+    </figure>
+
+    <figure>
+      <div class="phone">
+        <div class="bar"><span>VoCat-Setup-A1B2</span><span>/result</span></div>
+        <div class="body">
+          <h4>Connecting…</h4>
+          <p>VoCat is joining <b style="color:#e9eef4">Home Wi-Fi</b>.</p>
+          <p>If this page stops updating, look at VoCat: it shows the clock once it is online, and this setup network closes.</p>
+        </div>
+      </div>
+      <figcaption><b>Result</b><span>Refreshes itself, then says Connected, or why it failed, with a Try again link.</span></figcaption>
+    </figure>
+
+    <figure>
+      <div class="phone">
+        <div class="bar"><span>Home Wi-Fi</span><span>192.168.1.42</span></div>
+        <div class="body">
+          <h4>VoCat settings</h4>
+          <div class="field"><label>Name on screen</label><div class="input">John's desk</div></div>
+          <div class="field"><label>Keys are for</label>
+            <div class="seg"><span>Windows</span><span>Mac</span><span class="on">Linux</span></div>
+          </div>
+          <div class="field"><label>Brightness</label><div class="meter"><i></i></div></div>
+          <div class="btn">Save</div>
+          <div class="field" style="margin-top:14px"><label>Wi-Fi · Home Wi-Fi</label>
+            <div class="btn quiet">Change network</div>
+          </div>
+          <div class="btn warn">Turn VoCat off</div>
+        </div>
+      </div>
+      <figcaption><b>Settings</b><span>Name, which computer the Desktop keys target, brightness, Neurons texts, Wi-Fi and a remote off switch.</span></figcaption>
+    </figure>
+
+  </div>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>How the battery readout would work</h2>
+  </div>
+  <div class="notes">
+    <div class="note"><b>Bottom of the clock page</b><span>A small battery glyph and the percentage, under the rate ticker. The time and weather stay where they are, and a notice line still takes the ticker's place.</span></div>
+    <div class="note"><b>Five steps, not a smooth bar</b><span>The glyph comes from the font's built-in battery symbols (full, ¾, ½, ¼, empty, plus a charge bolt), so it moves in quarters. The percentage beside it is exact.</span></div>
+    <div class="note"><b>Colour only when it matters</b><span>Grey above 20 %, amber at 20 % and below, red at 10 % and below with "Charge me". Blue with a bolt while charging, and "Charged" once it's full on USB.</span></div>
+    <div class="note"><b>Read every 30 seconds</b><span>A normal task reads the gauge and hands the result to the screen, the same way the weather does. If the gauge doesn't answer, the readout stays hidden.</span></div>
+  </div>
+</section>
+
+</div>
+
+<script>
+/* The device screens, drawn at the real 360 x 360 scale of the panel. */
+const C = 180;
+const COL = {
+  bg: "#000000", text: "#FFFFFF", dim: "#8A94A6", accent: "#5EC8F2", amber: "#FFC857", red: "#FF6B5E",
+  ring1: "#2B3744", ring2: "#161D25", rim: "#40505F", off: "#3C4651", onAccent: "#03222F",
+  caption: "#A9B5C2", offFill: "#1A232B",
+};
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+
+function text(s, x, y, size, fill, weight = 500, anchor = "middle") {
+  return `<text x="${x}" y="${y}" text-anchor="${anchor}" font-family="Public Sans, system-ui, sans-serif"` +
+         ` font-size="${size}" font-weight="${weight}" fill="${fill}">${esc(s)}</text>`;
+}
+
+/* Icons drawn as shapes: the device uses flat monochrome glyphs, and typed symbols come out as
+   colour emoji in a browser. Each takes a centre, a nominal size and a fill. */
+const ICON = {
+  play: (x, y, s, f) =>
+    `<path d="M ${x - s * 0.62} ${y - s * 0.42} L ${x - s * 0.62} ${y + s * 0.42} L ${x - s * 0.1} ${y} Z" fill="${f}"/>` +
+    `<rect x="${x + s * 0.06}" y="${y - s * 0.42}" width="${s * 0.16}" height="${s * 0.84}" fill="${f}"/>` +
+    `<rect x="${x + s * 0.34}" y="${y - s * 0.42}" width="${s * 0.16}" height="${s * 0.84}" fill="${f}"/>`,
+  prev: (x, y, s, f) =>
+    `<rect x="${x - s * 0.52}" y="${y - s * 0.42}" width="${s * 0.14}" height="${s * 0.84}" fill="${f}"/>` +
+    `<path d="M ${x + s * 0.5} ${y - s * 0.42} L ${x + s * 0.5} ${y + s * 0.42} L ${x - s * 0.3} ${y} Z" fill="${f}"/>`,
+  next: (x, y, s, f) =>
+    `<rect x="${x + s * 0.38}" y="${y - s * 0.42}" width="${s * 0.14}" height="${s * 0.84}" fill="${f}"/>` +
+    `<path d="M ${x - s * 0.5} ${y - s * 0.42} L ${x - s * 0.5} ${y + s * 0.42} L ${x + s * 0.3} ${y} Z" fill="${f}"/>`,
+  volume: (x, y, s, f, waves) => {
+    let g = `<path d="M ${x - s * 0.6} ${y - s * 0.16} h ${s * 0.2} l ${s * 0.3} -${s * 0.3} v ${s * 0.92}` +
+            ` l -${s * 0.3} -${s * 0.3} h -${s * 0.2} z" fill="${f}"/>`;
+    for (let i = 0; i < waves; i++) {
+      const r = s * (0.24 + i * 0.18);
+      g += `<path d="M ${x + s * 0.12} ${y - r} A ${r} ${r} 0 0 1 ${x + s * 0.12} ${y + r}" fill="none"` +
+           ` stroke="${f}" stroke-width="${s * 0.1}" stroke-linecap="round"/>`;
+    }
+    return g;
+  },
+  image: (x, y, s, f) =>
+    `<rect x="${x - s * 0.6}" y="${y - s * 0.45}" width="${s * 1.2}" height="${s * 0.9}" rx="${s * 0.1}" fill="${f}"/>` +
+    `<circle cx="${x - s * 0.28}" cy="${y - s * 0.17}" r="${s * 0.1}" fill="${COL.bg}"/>` +
+    `<path d="M ${x - s * 0.45} ${y + s * 0.3} L ${x - s * 0.05} ${y - s * 0.12} L ${x + s * 0.2} ${y + s * 0.12}` +
+    ` L ${x + s * 0.33} ${y} L ${x + s * 0.48} ${y + s * 0.3} Z" fill="${COL.bg}"/>`,
+  home: (x, y, s, f) =>
+    `<path d="M ${x} ${y - s * 0.5} L ${x + s * 0.62} ${y + s * 0.02} L ${x + s * 0.44} ${y + s * 0.02}` +
+    ` L ${x + s * 0.44} ${y + s * 0.48} L ${x - s * 0.44} ${y + s * 0.48} L ${x - s * 0.44} ${y + s * 0.02}` +
+    ` L ${x - s * 0.62} ${y + s * 0.02} Z" fill="${f}"/>`,
+  chevron: (x, y, s, f, dir) =>
+    `<path d="M ${x - dir * s * 0.18} ${y - s * 0.42} L ${x + dir * s * 0.24} ${y} L ${x - dir * s * 0.18} ${y + s * 0.42}"` +
+    ` fill="none" stroke="${f}" stroke-width="${s * 0.16}" stroke-linecap="round" stroke-linejoin="round"/>`,
+  list: (x, y, s, f) => {
+    let g = "";
+    for (let i = -1; i <= 1; i++) {
+      const ly = y + i * s * 0.34;
+      g += `<rect x="${x - s * 0.5}" y="${ly - s * 0.09}" width="${s * 0.18}" height="${s * 0.18}" fill="${f}"/>` +
+           `<rect x="${x - s * 0.18}" y="${ly - s * 0.09}" width="${s * 0.68}" height="${s * 0.18}" fill="${f}"/>`;
+    }
+    return g;
+  },
+  keyboard: (x, y, s, f) => {
+    let g = `<rect x="${x - s * 0.7}" y="${y - s * 0.45}" width="${s * 1.4}" height="${s * 0.9}" rx="${s * 0.12}"` +
+            ` fill="none" stroke="${f}" stroke-width="${s * 0.09}"/>`;
+    for (let r = 0; r < 2; r++) {
+      for (let c = 0; c < 5; c++) {
+        g += `<rect x="${x - s * 0.52 + c * s * 0.23}" y="${y - s * 0.26 + r * s * 0.24}" width="${s * 0.12}"` +
+             ` height="${s * 0.12}" rx="${s * 0.03}" fill="${f}"/>`;
+      }
+    }
+    g += `<rect x="${x - s * 0.2}" y="${y + s * 0.2}" width="${s * 0.4}" height="${s * 0.1}" rx="${s * 0.03}" fill="${f}"/>`;
+    return g;
+  },
+  /* Battery like the font's symbol: outline, nub, fill in quarters; optional charge bolt beside it */
+  battery: (x, y, f, level, charging) => {
+    const w = 24, h = 12, steps = Math.round(Math.min(level, 100) / 25);
+    const x0 = x - w / 2, y0 = y - h / 2;
+    let g = `<rect x="${x0}" y="${y0}" width="${w}" height="${h}" rx="2.5" fill="none" stroke="${f}" stroke-width="1.8"/>` +
+            `<rect x="${x0 + w + 1}" y="${y - 2.5}" width="2.4" height="5" rx="1" fill="${f}"/>`;
+    for (let i = 0; i < steps; i++) {
+      g += `<rect x="${x0 + 2.6 + i * 4.9}" y="${y0 + 2.6}" width="4" height="${h - 5.2}" rx="0.6" fill="${f}"/>`;
+    }
+    if (charging) {
+      const bx = x0 - 9;
+      g += `<path d="M ${bx + 1.5} ${y - 7} L ${bx - 3} ${y + 1} L ${bx} ${y + 1} L ${bx - 1.5} ${y + 7}` +
+           ` L ${bx + 3} ${y - 1} L ${bx} ${y - 1} Z" fill="${f}"/>`;
+    }
+    return g;
+  },
+};
+
+/* One ring zone: an arc band between two radii, with the diagonal gaps left open */
+function zone(from, to, tint) {
+  const r1 = 68, r2 = 172, pad = 1.6;
+  const a1 = (from + pad) * Math.PI / 180, a2 = (to - pad) * Math.PI / 180;
+  const p = (r, a) => `${(C + r * Math.cos(a)).toFixed(1)},${(C + r * Math.sin(a)).toFixed(1)}`;
+  return `<path d="M ${p(r1, a1)} L ${p(r2, a1)} A ${r2} ${r2} 0 0 1 ${p(r2, a2)} L ${p(r1, a2)}` +
+         ` A ${r1} ${r1} 0 0 0 ${p(r1, a1)} Z" fill="${tint || "url(#ring)"}" stroke="${COL.rim}" stroke-width="0.8"/>`;
+}
+
+function wheel({ centre, zones, dim, note }) {
+  const icon = COL.text, cap = COL.caption;
+  let s = zone(225, 315) + zone(315, 405) + zone(45, 135) + zone(135, 225);
+  const at = [[C, C - 120], [C + 120, C], [C, C + 120], [C - 120, C]];   /* top, right, bottom, left */
+  zones.forEach((z, i) => {
+    const [x, y] = at[i];
+    const has = !!z.label;
+    s += z.draw(x, has ? y - 10 : y, 30, dim ? COL.off : icon);
+    if (has) s += text(z.label, x, y + 26, 13, dim ? COL.off : cap);
+  });
+  if (dim) {
+    s += `<circle cx="${C}" cy="${C}" r="54" fill="${COL.offFill}" stroke="${COL.rim}" stroke-width="1"/>`;
+    s += text(note, C, C + 5, 14, COL.dim);
+  } else {
+    s += `<circle cx="${C}" cy="${C}" r="62" fill="url(#glow)"/>`;
+    s += `<circle cx="${C}" cy="${C}" r="54" fill="url(#btn)"/>`;
+    s += centre(C, C, 40, COL.onAccent);
+  }
+  return s;
+}
+
+function chooser() {
+  let s = zone(225, 315) + zone(315, 405) + zone(45, 135) + zone(135, 225);
+  s += text("Which computer?", C, C - 116, 14, COL.dim);
+  s += text("Windows", C - 120, C + 5, 20, COL.text, 600);
+  s += text("Mac", C + 120, C + 5, 20, COL.text, 600);
+  s += text("Linux", C, C + 125, 20, COL.text, 600);
+  s += `<circle cx="${C}" cy="${C}" r="54" fill="${COL.offFill}" stroke="${COL.rim}" stroke-width="1"/>`;
+  s += ICON.keyboard(C, C, 40, COL.dim);
+  return s;
+}
+
+/* Battery readout states: colour and words follow the level and the charger */
+function batteryLook(b) {
+  if (b.charging && b.level >= 100) return { fill: COL.accent, label: "Charged" };
+  if (b.charging) return { fill: COL.accent, label: `${b.level}%` };
+  if (b.level <= 10) return { fill: COL.red, label: `${b.level}% · Charge me` };
+  if (b.level <= 20) return { fill: COL.amber, label: `${b.level}%` };
+  return { fill: COL.dim, label: `${b.level}%` };
+}
+
+/* Glyph + label as one centred group; width estimated from the label length */
+function batteryRow(b, cx, y) {
+  const look = batteryLook(b);
+  const tw = look.label.length * 7.6;
+  const gw = 30 + (b.charging ? 10 : 0);
+  const left = cx - (gw + 6 + tw) / 2;
+  const gx = left + (b.charging ? 10 : 0) + 12;
+  return ICON.battery(gx, y, look.fill, b.level, b.charging) +
+         text(look.label, left + gw + 6, y + 5, 14, look.fill, 600, "start");
+}
+
+/* A level arc hugging the bottom of the rim, 100 degrees wide, centred straight down */
+function batteryArc(b) {
+  const look = batteryLook(b), r = 166, span = 100, start = 90 + span / 2;
+  const p = a => `${(C + r * Math.cos(a * Math.PI / 180)).toFixed(1)},${(C + r * Math.sin(a * Math.PI / 180)).toFixed(1)}`;
+  const end = start - span * Math.min(b.level, 100) / 100;
+  return `<path d="M ${p(start)} A ${r} ${r} 0 0 0 ${p(90 - span / 2)}" fill="none" stroke="#1E2731" stroke-width="5" stroke-linecap="round"/>` +
+         `<path d="M ${p(start)} A ${r} ${r} 0 0 0 ${p(end)}" fill="none" stroke="${look.fill}" stroke-width="5" stroke-linecap="round"/>` +
+         text(`${b.level}%`, C, 326, 13, look.fill, 600);
+}
+
+/* Positions follow app_dashboard.c: name 46, date 72, time centre 135, weather 200, sub 235,
+   ticker bottom 298; the battery row sits below the ticker at about y 322. */
+function clockScreen({ name, battery, place = "bottom", ticker = "USD/HKD 7.845 · BTC $81,176" }) {
+  let s = "";
+  const top = place === "top" && battery;
+  if (top) s += batteryRow(battery, C, 30);
+  if (name) s += text(name, C, 61, 15, COL.accent, 600);
+  s += text("Friday, 2 Oct", C, 93, 19, COL.dim);
+  s += text("5:17 PM", C, 152, 46, COL.text, 700);
+  s += text("28°C  Mostly clear", C, 208, 24, COL.accent, 600);
+  s += text("H 32° L 24° · South Tangerang", C, 240, 13, COL.dim);
+  s += text(ticker, C, 291, 17, COL.amber);
+  if (battery && place === "bottom") s += batteryRow(battery, C, 321);
+  if (battery && place === "arc") s += batteryArc(battery);
+  return s;
+}
+
+function setupScreen() {
+  let s = text("Wi-Fi setup", C, 58, 19, COL.accent, 600);
+  const q = 118, x0 = C - q / 2, y0 = 82;
+  s += `<rect x="${x0}" y="${y0}" width="${q}" height="${q}" rx="3" fill="#FFFFFF"/>`;
+  const m = q / 21;
+  const finder = (fx, fy) =>
+    `<rect x="${x0 + fx * m}" y="${y0 + fy * m}" width="${m * 7}" height="${m * 7}" fill="#000"/>` +
+    `<rect x="${x0 + (fx + 1) * m}" y="${y0 + (fy + 1) * m}" width="${m * 5}" height="${m * 5}" fill="#fff"/>` +
+    `<rect x="${x0 + (fx + 2) * m}" y="${y0 + (fy + 2) * m}" width="${m * 3}" height="${m * 3}" fill="#000"/>`;
+  s += finder(1, 1) + finder(13, 1) + finder(1, 13);
+  let seed = 7;
+  for (let gy = 1; gy < 20; gy++) {
+    for (let gx = 1; gx < 20; gx++) {
+      const inFinder = (gx < 9 && gy < 9) || (gx > 11 && gy < 9) || (gx < 9 && gy > 11);
+      seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+      if (!inFinder && (seed >> 16) % 100 < 45) {
+        s += `<rect x="${(x0 + gx * m).toFixed(1)}" y="${(y0 + gy * m).toFixed(1)}" width="${m.toFixed(1)}" height="${m.toFixed(1)}" fill="#000"/>`;
+      }
+    }
+  }
+  s += text("Scan, or join Wi-Fi:", C, 238, 13, COL.dim);
+  s += text("VoCat-Setup-A1B2", C, 264, 19, COL.text, 600);
+  s += text("Open 192.168.4.1", C, 294, 19, COL.accent, 600);
+  return s;
+}
+
+function timersScreen() {
+  let s = text("Timers", C, 74, 19, COL.accent, 600);
+  s += text("Tea  4:12", C, 140, 20, COL.text);
+  s += text("Laundry  22:47", C, 172, 20, COL.text);
+  s += text("Volume 35%", C, 262, 14, COL.dim);
+  s += text("−", C - 115, 268, 26, COL.accent, 600);
+  s += text("+", C + 115, 268, 26, COL.accent, 600);
+  s += text("USD/HKD 7.845", C, 306, 14, COL.amber);
+  return s;
+}
+
+function talkScreen() {
+  let s = text("Listening…", C, 74, 19, COL.accent, 600);
+  s += text("“remind me in five minutes”", C, 130, 15, "#A8B3C4");
+  s += text("Sure — I'll remind you at", C, 186, 17, COL.text);
+  s += text("5:22 PM.", C, 212, 17, COL.text);
+  return s;
+}
+
+const NAME = "John's desk";
+
+const SCREENS = [
+  { title: "Clock", note: "Name, date, time, weather and the rate ticker, with the battery level underneath.",
+    draw: () => clockScreen({ name: NAME, battery: { level: 82 } }), badge: "battery proposed" },
+  { title: "Media keys", note: "Play/pause in the middle; previous and next either side; volume top and bottom, repeating while held.",
+    draw: () => wheel({ centre: ICON.play, zones: [
+      { draw: (x, y, s, f) => ICON.volume(x, y, s, f, 3) }, { draw: ICON.next },
+      { draw: (x, y, s, f) => ICON.volume(x, y, s, f, 1) }, { draw: ICON.prev }] }) },
+  { title: "Desktop keys", note: "Overview in the middle, screenshot above, show desktop below, and a desktop either side. Shortcuts follow the chosen computer.",
+    draw: () => wheel({ centre: ICON.list, zones: [
+      { draw: ICON.image, label: "Capture" },
+      { draw: (x, y, s, f) => ICON.chevron(x, y, s, f, 1), label: "Next desk" },
+      { draw: ICON.home, label: "Desktop" },
+      { draw: (x, y, s, f) => ICON.chevron(x, y, s, f, -1), label: "Prev desk" }] }) },
+  { title: "Which computer?", note: "Asked the first time you open the Desktop page. Holding its centre button asks again.",
+    draw: chooser },
+  { title: "Keys without a computer", note: "When no computer is connected the keys dim and the middle says why: No computer, Starting or Flash mode.",
+    draw: () => wheel({ dim: true, note: "No computer", zones: [
+      { draw: (x, y, s, f) => ICON.volume(x, y, s, f, 3) }, { draw: ICON.next },
+      { draw: (x, y, s, f) => ICON.volume(x, y, s, f, 1) }, { draw: ICON.prev }] }) },
+  { title: "Wi-Fi setup", note: "Replaces the clock while the setup network is open. Scan the code to join, then open the address.",
+    draw: setupScreen },
+  { title: "Timers", tag: "voice", note: "Voice app only: timers set by voice, with the speaker volume underneath.",
+    draw: timersScreen },
+  { title: "Conversation", tag: "voice", note: "Voice app only: appears while the agent listens and answers, then returns to the page you were on.",
+    draw: talkScreen },
+];
+
+const PLACEMENTS = [
+  { title: "A · Bottom", badge: "recommended", note: "Glyph and percentage under the ticker. Fits the round edge with room to spare and leaves the top for the name.",
+    draw: () => clockScreen({ name: NAME, battery: { level: 82 }, place: "bottom" }) },
+  { title: "B · Rim arc", note: "A level arc along the bottom edge, like a watch face. Reads at a glance from across the desk, but needs a drawn image instead of a font glyph.",
+    draw: () => clockScreen({ name: NAME, battery: { level: 82 }, place: "arc" }) },
+  { title: "C · Top", note: "Above the name, where a phone puts it. The screen is narrowest there, and it crowds the name.",
+    draw: () => clockScreen({ name: NAME, battery: { level: 82 }, place: "top" }) },
+];
+
+const STATES = [
+  { title: "On battery", note: "Grey, so it stays out of the way.", b: { level: 82 } },
+  { title: "Low", note: "Amber at 20 % and below.", b: { level: 18 } },
+  { title: "Very low", note: "Red at 10 % and below, with a nudge.", b: { level: 7 } },
+  { title: "Charging", note: "Blue with a bolt while USB is charging it.", b: { level: 64, charging: true } },
+  { title: "Charged", note: "Full and still on USB.", b: { level: 100, charging: true } },
+];
+
+const defs = `<defs>
+  <linearGradient id="ring" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="${COL.ring1}"/><stop offset="1" stop-color="${COL.ring2}"/>
+  </linearGradient>
+  <linearGradient id="btn" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#8BDDF8"/><stop offset="1" stop-color="#36ACDE"/>
+  </linearGradient>
+  <radialGradient id="glow">
+    <stop offset="0.82" stop-color="${COL.accent}" stop-opacity="0.45"/>
+    <stop offset="1" stop-color="${COL.accent}" stop-opacity="0"/>
+  </radialGradient>
+</defs>`;
+
+function figure(s, body) {
+  return `
+  <figure>
+    <svg viewBox="-6 -6 372 372" role="img" aria-label="${esc(s.title)} screen">
+      ${defs}
+      <circle cx="${C}" cy="${C}" r="179" fill="none" stroke="#252c36" stroke-width="6"/>
+      <circle cx="${C}" cy="${C}" r="176" fill="${COL.bg}"/>
+      ${body}
+    </svg>
+    <figcaption>
+      <b>${esc(s.title)}${s.tag === "voice" ? ' <span class="tag voice">voice app</span>' : ""}${s.badge ? ` <span class="tag new">${esc(s.badge)}</span>` : ""}</b>
+      <span>${esc(s.note)}</span>
+    </figcaption>
+  </figure>`;
+}
+
+document.getElementById("screens").innerHTML = SCREENS.map(s => figure(s, s.draw())).join("");
+document.getElementById("placements").innerHTML = PLACEMENTS.map(s => figure(s, s.draw())).join("");
+document.getElementById("states").innerHTML = STATES.map(s =>
+  figure(s, clockScreen({ name: NAME, battery: s.b }))).join("");
+</script>
+
+</body></html>
